@@ -1,16 +1,17 @@
 [tool.poetry]
-name = "redpill weather"
+name = "redpill-weather"
 version = "0.1.0"
 description = ""
 authors = ["Tim Rozmajzl <tim.rozmajzl@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.11,<3.13"
 requests = "^2.32.3"
 pandas = "^2.2.3"
 numpy = "^2.1.2"
 geopy = "^2.4.1"
+dlt = {extras = ["duckdb"], version = "^1.3.0"}
 
 
 [build-system]

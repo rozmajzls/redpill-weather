@@ -1,0 +1,4 @@
+data/*
+.minio.sys/*
+*.duckdb
+*.json
