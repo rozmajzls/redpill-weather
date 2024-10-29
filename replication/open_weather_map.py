@@ -56,7 +56,7 @@ pipeline = dlt.pipeline(
 def main():
     # # Run the pipeline with the weather data source
     # info = pipeline.run(source)
-    print(API_KEY)
+    # print(info)
 
     # Fetch data using dlt
     data = next(source)  # Assuming the source yields data
