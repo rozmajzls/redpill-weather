@@ -1,8 +1,12 @@
-import dlt
 from dlt.sources.rest_api import rest_api_source
+import os
+from dotenv import load_dotenv
 
-API_KEY = "5be0226f960d762c0448f7c55d9eb986"
-#API_KEY = "d0b5c0b5572003d628dff99591e45d4d"
+script_dir = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), '../.env'))
+load_dotenv(dotenv_path=script_dir)
+
+API_KEY = os.getenv('OPENMAPS_API_KEY')
 CITY = 'London'
 
 api_url = 'http://api.openweathermap.org/data/2.5/weather'
@@ -13,22 +17,22 @@ params = {
 
 # Define the API endpoint and parameters
 source = rest_api_source({
-     "client":  {
-         "base_url": "http://api.openweathermap.org/",
-         "auth": {
-             "token": API_KEY
-         }
-     },
-     "resources": [
+    "client":  {
+        "base_url": "http://api.openweathermap.org/",
+        "auth": {
+            "token": API_KEY
+        }
+    },
+    "resources": [
         {
             "name": "weather_data",
             "endpoint":
-               {
-                  "path": "data/2.5/weather",
-                  "params": params
+            {
+                "path": "data/2.5/weather",
+                "params": params
             }
         }
-     ]
+    ]
 })
 
 #  https://api.openweathermap.org/data/3.0/onecall?lat={lat}&lon={lon}&exclude={part}&appid={API
@@ -47,19 +51,22 @@ pipeline = dlt.pipeline(
 # )
 
 # Main function to run the pipeline
+
+
 def main():
     # # Run the pipeline with the weather data source
     # info = pipeline.run(source)
-    # print(info)
+    print(API_KEY)
 
     # Fetch data using dlt
-       data = next(source)  # Assuming the source yields data
+    data = next(source)  # Assuming the source yields data
 
-       # Write data to a JSON file
-       with open('weather_data.json', 'w') as json_file:
-           json.dump(data, json_file, indent=4)
+    # Write data to a JSON file
+    with open('weather_data.json', 'w') as json_file:
+        json.dump(data, json_file, indent=4)
 
-       print("Data written to weather_data.json")
+    print("Data written to weather_data.json")
+
 
 if __name__ == '__main__':
     main()
