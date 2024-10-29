@@ -2,3 +2,4 @@ data/*
 .minio.sys/*
 *.duckdb
 *.json
+.env
